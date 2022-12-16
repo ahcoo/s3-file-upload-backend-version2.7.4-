@@ -18,7 +18,7 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public void createArticle(CreateArticleForm createArticleForm) {
+    public Article createArticle(CreateArticleForm createArticleForm) {
         Article article = Article.builder()
                 .title(createArticleForm.getTitle())
                 .body(createArticleForm.getBody())
@@ -26,5 +26,8 @@ public class ArticleService {
                 .updatedDate(LocalDateTime.now())
                 .build();
         articleRepository.save(article);
+        return article;
     }
+
+
 }

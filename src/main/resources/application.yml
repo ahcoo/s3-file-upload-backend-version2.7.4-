@@ -1,4 +1,3 @@
-
 server:
   port: 8089
 
@@ -11,3 +10,17 @@ spring:
   jpa:
     hibernate:
 #      ddl-auto: create
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${aws.accessKey}
+      secretKey: ${aws.secretKey}
+
+    s3:
+      bucket: file-upload-heungjin
+      dir: /
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
