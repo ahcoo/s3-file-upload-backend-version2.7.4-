@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,6 @@ public class CreateArticleForm {
     @NotNull
     @Size(min = 1, max = 3000)
     private String body;
+
+    private List<Integer> imageIdList;
 }

@@ -2,9 +2,12 @@ package com.example.fileupload.article.controller;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.example.fileupload.article.dao.ArticleRepository;
 import com.example.fileupload.article.domain.Article;
+import com.example.fileupload.article.dto.ArticleDto;
 import com.example.fileupload.article.dto.CreateArticleForm;
 import com.example.fileupload.article.service.ArticleService;
+import com.example.fileupload.article_image.service.ArticleImageService;
 import com.example.fileupload.aws.service.AwsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +35,8 @@ public class ArticleController {
 
     private final AwsService awsService;
     private final ArticleService articleService;
-//    private final ArticleImageService articleImageService;
+
+    private final ArticleImageService articleImageService;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -43,22 +47,28 @@ public class ArticleController {
     }
 
     @GetMapping("")
-    public List<Article> getArticles() {
+    public List<ArticleDto> getArticles() {
         return articleService.getAllArticles();
     }
 
-    @PostMapping("")
-    public void createArticle(@Valid CreateArticleForm createArticleForm, @RequestParam(value="files", required = false) List<MultipartFile> files) throws IOException {
-
-        String originalFilename = files.get(0).getOriginalFilename();
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(files.get(0).getInputStream().available());
-
-        amazonS3.putObject(bucket, originalFilename, files.get(0).getInputStream(), objectMetadata);
-//        Article article = articleService.createArticle(createArticleForm);
-//
-//        String imgUrl = awsService.sendFileToS3Bucket(files.get(0));
-
-        articleService.createArticle(createArticleForm);
+    @GetMapping("/{id}")
+    public ArticleDto getArticles(@PathVariable Long id) {
+        return articleService.getArticle(id);
     }
+
+    @PostMapping("")
+    public void createArticle(@Valid CreateArticleForm createArticleForm) throws IOException {
+
+        createArticleForm.getImageIdList()
+                .stream()
+                    .forEach(id-> {
+                        System.out.println("id : "+id);
+                    });
+
+        //글 작성(1번만 작성하면 됨)
+        Article article = articleService.createArticle(createArticleForm);
+
+
+    }
+
 }
