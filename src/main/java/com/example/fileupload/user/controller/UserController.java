@@ -4,13 +4,10 @@ import com.example.fileupload.user.dao.UserRepository;
 import com.example.fileupload.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
@@ -24,4 +21,15 @@ public class UserController {
         userRepository.save(user);
         return "회원가입 완료";
     }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
 }

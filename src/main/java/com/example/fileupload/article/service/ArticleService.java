@@ -56,4 +56,11 @@ public class ArticleService {
 
 
     }
+
+    public void deleteArticle(Long id) {
+        articleRepository.deleteById(id);
+        //위 코드로는 해당 게시물만 삭제가 가능. 하지만 S3에 업로드된 사진도 함께 지워야 함.
+        
+
+    }
 }

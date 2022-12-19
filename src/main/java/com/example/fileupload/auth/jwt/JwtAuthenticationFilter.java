@@ -32,7 +32,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
 
+        //login url 지정
+        setFilterProcessesUrl("/api/vi/login");
     }
 
     //login 요청을 하면 로그인 시도를 위해서 실행되는 함수

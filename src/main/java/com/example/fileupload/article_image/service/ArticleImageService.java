@@ -25,24 +25,21 @@ public class ArticleImageService {
         return dto;
     }
 
-    public void setArticleAtArticleImageList(Article article1, List<Integer> imageIdList) {
+
+
+
+    public void setArticleAtArticleImageList(Article article1, List<Long> imageIdList) {
         List<ArticleImage> articleImageList = articleImageRepository.findByIdIn(imageIdList);
-        System.out.println("length : " + articleImageList.size());
+        System.out.println("게시물에 등록된 사진 개수: " + articleImageList.size());
+        articleImageList
+                .stream()
+                .forEach(
+                        articleImage -> {
+                            articleImage.setArticle(article1);
+                            articleImageRepository.save(articleImage);
+                        }
+                );
     }
-
-
-//    public void setArticleAtArticleImageList(Article article1, List<Long> imageIdList) {
-//        List<ArticleImage> articleImageList = articleImageRepository.findByIdIn(imageIdList);
-//        System.out.println("게시물에 등록된 사진 개수: " + articleImageList.size());
-//        articleImageList
-//                .stream()
-//                .forEach(
-//                        articleImage -> {
-//                            articleImage.setArticle(article1);
-//                            articleImageRepository.save(articleImage);
-//                        }
-//                );
-//    }
 //
 //    public List<ArticleImage> getArticleImageByArticle(Article article) {
 //        return articleImageRepository.findByArticle(article);

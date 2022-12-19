@@ -30,7 +30,7 @@ public class Article {
     private LocalDateTime updatedDate;
 
     //게시물에 들어있는 사진 배열들을 가져오기 위한 List
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<ArticleImage> imageList;
 
 }
