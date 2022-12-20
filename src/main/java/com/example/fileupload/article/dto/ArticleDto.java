@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 public class ArticleDto {
     private Long id;
 
+    private String articleUniqueId;
+
     private String title;
 
     private String body;
@@ -25,15 +27,19 @@ public class ArticleDto {
 
     private LocalDateTime updatedDate;
 
+    private Boolean isTemp;
+
     private List<ArticleImageDto> imageList;
 
 
     public ArticleDto(Article article) {
         this.id = article.getId();
+        this.articleUniqueId = article.getArticleUniqueId();
         this.title = article.getTitle();
         this.body = article.getBody();
         this.createDate = article.getCreateDate();
         this.updatedDate = article.getUpdatedDate();
+        this.isTemp = article.getIsTemp();
 
 
     List<ArticleImageDto> articleImageDtoList = article.getImageList()

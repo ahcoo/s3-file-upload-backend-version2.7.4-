@@ -1,8 +1,6 @@
 package com.example.fileupload.article.controller;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.example.fileupload.article.dao.ArticleRepository;
 import com.example.fileupload.article.domain.Article;
 import com.example.fileupload.article.dto.ArticleDto;
 import com.example.fileupload.article.dto.CreateArticleForm;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -74,6 +71,33 @@ public class ArticleController {
     @DeleteMapping("")
     public void deleteArticle(@RequestParam("id") Long id) {
         articleService.deleteArticle(id);
+    }
+
+
+    //임시저장된 article 가져오기
+    @GetMapping("/tmp")
+    public ArticleDto getTmpArticle(@RequestParam("articleUniqueId") String articleUniqueId) {
+
+        System.out.println(articleUniqueId);
+
+        return articleService.getTmpArticle(articleUniqueId);
+    }
+
+
+    //게시물 임시저장 로직
+    @PostMapping("/tmpSave")
+    public void tmpSaveArticle(@RequestParam("articleUniqueId") String articleUniqueId, @Valid CreateArticleForm createArticleForm) {
+        articleService.createTmpArticle(articleUniqueId, createArticleForm);
+    }
+
+    @PatchMapping("/tmpSave")
+    public void tmpSaveArticlePatch(@RequestParam("articleUniqueId") String articleUniqueId, @Valid CreateArticleForm createArticleForm) {
+        articleService.patchTmpArticle(articleUniqueId, createArticleForm);
+    }
+
+    @PatchMapping("/completeSave")
+    public void completeSaveArticlePatch(@RequestParam("articleUniqueId") String articleUniqueId, @Valid CreateArticleForm createArticleForm) {
+        articleService.patchCompleteSaveArticle(articleUniqueId, createArticleForm);
     }
 
 }

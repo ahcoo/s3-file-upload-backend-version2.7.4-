@@ -14,7 +14,7 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: ${aws.accessKey}
+      accessKey: ${aws.accesKey}
       secretKey: ${aws.secretKey}
 
     s3:
