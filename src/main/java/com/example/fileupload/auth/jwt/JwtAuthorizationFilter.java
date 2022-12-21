@@ -8,6 +8,10 @@ import com.example.fileupload.auth.PrincipalDetails;
 import com.example.fileupload.user.dao.UserRepository;
 import com.example.fileupload.user.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,10 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 //Spring security가 가지고 있는 filter 중, BasicAuthenticationFilter라는 것이 있음.
@@ -26,7 +27,7 @@ import java.io.IOException;
 
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-//권한 체크하는 필터
+////권한 체크하는 필터
 
     private UserRepository userRepository;
 
@@ -50,7 +51,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         String token = request.getHeader("Authorization").replace(JwtProperties.TOKEN_PREFIX, "");
-        //여기서의 JwtProperties.TOKEN_PREFIX == "Bearer "
+//        //여기서의 JwtProperties.TOKEN_PREFIX == "Bearer "
 
         String username = null;
 

@@ -1,5 +1,7 @@
 package com.example.fileupload.config;
 
+//import com.example.fileupload.auth.jwt.JwtAuthenticationFilter;
+//import com.example.fileupload.auth.jwt.JwtAuthorizationFilter;
 import com.example.fileupload.auth.jwt.JwtAuthenticationFilter;
 import com.example.fileupload.auth.jwt.JwtAuthorizationFilter;
 import com.example.fileupload.user.dao.UserRepository;
@@ -36,24 +38,23 @@ public class SecurityConfig {
                 .httpBasic().disable() //http 기본 인증방식을 사용 안함
                 .apply(new CustomDsl())
                 .and()
-//                .authorizeHttpRequests(authorize -> authorize
-//
-//                        .requestMatchers("/api/v1/user/**")
-////                                .hasRole("ROLE_USER")
-//                        .hasAnyRole("USER", "ADMIN")
-//                        .requestMatchers("/api/v1/admin/**")
-//                        .hasRole("ADMIN")
-//                        .anyRequest()
-//                        .permitAll()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/v1/user/**")
+//                                .hasRole("ROLE_USER")
+                        .hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/v1/admin/**")
+                        .hasRole("ADMIN")
+                        .anyRequest()
+                        .permitAll()
 
-                .authorizeRequests( authorize -> authorize
-                         .antMatchers("/api/v1/user/**")
-//                         .hasRole("ROLSE_USER")
-                         .hasAnyRole("USER", "ADMIN")
-                         .antMatchers("/api/v1/admin/**")
-                         .hasRole("ADMIN")
-                         .anyRequest()
-                         .permitAll()
+//                .authorizeRequests( authorize -> authorize
+//                         .antMatchers("/api/v1/user/**")
+////                         .hasRole("ROLSE_USER")
+//                         .hasAnyRole("USER", "ADMIN")
+//                         .antMatchers("/api/v1/admin/**")
+//                         .hasRole("ADMIN")
+//                         .anyRequest()
+//                         .permitAll()
                         // Todo:권한설정
 
                 )

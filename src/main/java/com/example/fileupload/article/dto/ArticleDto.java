@@ -6,7 +6,6 @@ import com.example.fileupload.article_image.dto.ArticleImageDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

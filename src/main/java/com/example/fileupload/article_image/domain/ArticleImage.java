@@ -2,9 +2,9 @@ package com.example.fileupload.article_image.domain;
 
 
 import com.example.fileupload.article.domain.Article;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 
 @Entity
 @Getter
