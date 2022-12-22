@@ -14,8 +14,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: ${aws.accessKey}
-      secretKey: ${aws.secretKey}
+      accessKey: AKIARY6OP5VYI4W44GY6
+      secretKey: 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
 
     s3:
       bucket: file-upload-heungjin
